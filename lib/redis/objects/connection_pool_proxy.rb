@@ -6,8 +6,8 @@ class Redis
         @pool = pool
       end
 
-      def method_missing(name, *args, &block)
-        @pool.with { |x| x.send(name, *args, &block) }
+      def method_missing(name, *args, **kwargs, &block)
+        @pool.with { |x| x.send(name, *args, **kwargs, &block) }
       end
 
       def respond_to_missing?(name, include_all = false)
